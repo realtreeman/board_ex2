@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import me.realtree.mapper.BoardMapper;
 import me.realtree.model.Board;
+import me.realtree.model.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -15,8 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper boardMapper;
 	
 	@Override
-	public List<Board> getList() {
-		return boardMapper.getList();
+	public List<Board> getList(Criteria criteria) {
+		return boardMapper.getList(criteria);
 	}
 
 	@Override
@@ -37,6 +38,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void remove(Long bno) {
 		boardMapper.delete(bno);
+	}
+
+	@Override
+	public int totalCount() {
+		return boardMapper.totalCount();
 	}
 
 }

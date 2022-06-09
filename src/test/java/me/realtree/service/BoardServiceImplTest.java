@@ -15,10 +15,10 @@ public class BoardServiceImplTest extends AppTest{
 	@Autowired
 	BoardService service;
 	
-	@Test
-	public void getListTest() {
-		List<Board> list = service.getList();
-		assertEquals(4, list.size());
-	}
+//	@Test
+//	public void getListTest() {
+//		List<Board> list = service.getList();
+//		assertEquals(4, list.size());
+//	}
 
 }

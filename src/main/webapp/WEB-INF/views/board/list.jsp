@@ -5,6 +5,7 @@
 
 <div class="container">
 	<h2>자유게시판</h2>
+	<a href="register">글쓰기</a>
 	<table class="table">
 		<tr>
 			<th>번호</th>
@@ -21,16 +22,25 @@
 			</td>
 			<td>${b.writer}</td>
 			<td>
-				<fmt:parseDate var="regDate" value="${b.regDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"/>
+				<fmt:parseDate var="regDate" value="${b.regDate}" pattern="yyyy-MM-dd'T'HH:mm"/>
 				<fmt:formatDate value="${regDate }" pattern="yyyy년MM월dd일 HH시mm분"/>
 			</td>
 			<td>
-				<fmt:parseDate var="updateDate" value="${b.updateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"/>
+				<fmt:parseDate var="updateDate" value="${b.updateDate}" pattern="yyyy-MM-dd'T'HH:mm"/>
 				<fmt:formatDate value="${updateDate }" pattern="yyyy년MM월dd일 HH시mm분"/>
 			</td>
 		</tr>
 		</c:forEach>
 	</table>
+	<c:if test="${pageMaker.prev }">
+		<a href="?page=${pageMaker.startPage -1 }">[이전페이지]</a>
+	</c:if>
+	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+		<a href="?page=${pageNum}">[${pageNum}]</a>
+	</c:forEach>
+	<c:if test="${pageMaker.next}">
+		<a href="?page=${pageMaker.endPage +1 }">[다음페이지]</a>
+	</c:if>
 </div>
 
 <%@ include file="../layout/footer.jsp" %>

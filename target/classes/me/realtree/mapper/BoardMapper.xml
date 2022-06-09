@@ -6,7 +6,11 @@
 <mapper namespace="me.realtree.mapper.BoardMapper">
 
 	<select id="getList" resultType="me.realtree.model.Board">
-		select * from board_tbl
+		select * from board_tbl limit #{pageStart},#{perPageNum}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		select count(*) from board_tbl
 	</select>
 	
 	<select id="get" resultType="me.realtree.model.Board">
