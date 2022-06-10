@@ -23,7 +23,7 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public String boardList(Model model, Criteria criteria) {
-		PageMaker pageMaker = new PageMaker(criteria, service.totalCount());
+		PageMaker pageMaker = new PageMaker(criteria, service.totalCount(criteria));
 		model.addAttribute("list",service.getList(criteria));
 		model.addAttribute("pageMaker",pageMaker);
 		return "board/list";
