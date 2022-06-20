@@ -1,16 +1,21 @@
-package me.realtree.mapper;
+package me.realtree.service;
+
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import me.realtree.AppTest;
 
-public class TotalCountTest extends AppTest{
+public class ReplyServiceImplTest extends AppTest{
+
+	
 	@Autowired
-	BoardMapper mapper;
+	ReplyService service;
 	
 	@Test
 	public void test() {
-//		assertEquals(412, mapper.totalCount());
+		service.get(4L);
 	}
+
 }

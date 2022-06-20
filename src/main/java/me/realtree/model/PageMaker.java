@@ -26,13 +26,7 @@ public class PageMaker {
 		startPage = endPage - displayPageNum + 1;
 		tempEndPage = (int) Math.ceil(totalCount/ (double)criteria.getPerPageNum());
 		if(endPage > tempEndPage) endPage = tempEndPage; //엔드 페이지 계산
-		
-		//endPage < tempEndPage;
-		// endPage tempEndPage;
-		//[1 ]~ [10] 42 true
-		//[11]~[20] 42true
-		//endPage[50]<tempEndPage[42]
-				
+	
 		prev = startPage != 1;
 		next = endPage < tempEndPage;
 	}
