@@ -1,5 +1,6 @@
 package me.realtree.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,11 +9,15 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Criteria {
+	
+	
 	int page;
 	int perPageNum;
 	
 	String type; //제목+내용 , 작성자 
 	String keyword;
+	
+	
 	
 	public Criteria() {
 		this.page = 1;
@@ -31,5 +36,11 @@ public class Criteria {
 		//TC
 		//split을 쓸때 타입이 TC면 {T,C} 생산 CW면 {C,W} 생산
 		return type !=null ? type.split("") : new String[] {};
+	}
+
+	public Criteria(int page, int perPageNum) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
 	}
 }
