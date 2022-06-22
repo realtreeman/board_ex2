@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
+<script src="${contextPath}/resources/js/get.js"></script>
 <div class="container">
 	<div class="getData">
 		<input type="hidden" name="page" id="page" value=${param.page}>
@@ -28,7 +29,31 @@
 		<button class="btn btn-danger remove">삭제</button>
 		<button class="btn btn-primary list">목록</button>	
 	</form>	
-</div>
+	
+	<!-- 댓글 -->
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>댓글을 달아주세요</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="chat">
+						<li data-rno='1'>
+							<div>
+								<div class='header'>
+									<strong class='primary-font'>홍길동</strong>
+									<small class='pull-right text-muted'>2022-02-22</small>
+								</div>
+								<p>댓글 내용.....</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div> <!-- pannel end -->
+		</div> <!--  col end -->
+	</div> <!-- row end -->
+</div> <!-- container end -->
 <script>
 $(function(){
 	let getForm = $("#getForm");
@@ -51,6 +76,7 @@ $(function(){
 		getForm.submit();
 	})
 })
+
 //댓글 등록 테스트
 /*
 $(function(){	
@@ -66,6 +92,42 @@ $(function(){
 	replyService.add(reply,callback);
 })
 */
+
+$(function(){
+	// 목록 테스트
+	let bnoValue = $('input[name="bno"]').val();
+	
+	replyService.getList({bno:bnoValue},function(list){
+		/*for(let i=0, len = list.length || 0; i<len; i++){
+			console.log(list[i])
+		}*/
+		//향상된 for문임
+		for(let reply of list){
+			console.log(reply)
+		}
+	});
+})
+
+$(function(){
+	// 수정테스트
+	function updateTest(){
+		replyService.update({
+			rno : 4,
+			bno : 1,
+			reply : "댓글 내용을 수정합니다......"
+		},function(result){
+			alert('수정')
+		})	
+	}
+	function deleteTest(){
+		replyService.remove(4, function(result){
+			alert(result);
+		}, function(){
+			alert('실패')
+		})
+	}
+	//deleteTest();
+})
 </script>
 <%@ include file="../layout/footer.jsp" %>
 
