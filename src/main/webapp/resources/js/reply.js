@@ -73,12 +73,22 @@ let replyService = (function(){
 		});
 	} //update end
 	
+	//조회
+	function get(rno, callback,error){ //파라미터 이름 rno로
+		$.get(contextPath + "/replies/"+rno, function(result){ // contextPath 추가
+			if(callback) callback(result)
+		}).fail(function(xhr, status, err){
+			if(error) error(err)
+		})
+	}
+	
 	//getList : getList 이렇게 해야 메서드 등록
 	return {
 		add : add, 
 		getList : getList,
 		remove : remove,
-		update : update
+		update : update,
+		get : get //반드시 추가하세요
 	}
 })();
 
