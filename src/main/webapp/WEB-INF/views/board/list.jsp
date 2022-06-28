@@ -36,7 +36,9 @@
 		<tr>
 			<td>${b.bno}</td>
 			<td>
-				<a href="${b.bno}" class="get">${b.title}</a>
+				<a href="${b.bno}" class="get">
+				${b.title}<b>[${b.replyCnt}]</b>
+				</a>
 			</td>
 			<td>${b.writer}</td>
 			<td>
