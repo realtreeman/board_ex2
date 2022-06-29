@@ -13,11 +13,16 @@
 	<input type="file" name="uploadFile" multiple="multiple">
 </div>
 <button id="uploadBtn">업로드</button>
+
+<div class="uploadResult">
+	<ul></ul>
+</div>
+
 </body>
 <script>
 $(function(){
 	let contextPath = '${pageContext.request.contextPath}';
-	let regex = new RegExp("(.*?)\.(exe|sh|js|alz|txt)$")
+	let regex = new RegExp("(.*?)\.(exe|sh|js|alz)$")
 	let maxSize = 5242880;
 	
 	function checkExtension(fileName, fileSize){
@@ -31,6 +36,7 @@ $(function(){
 		}
 		return true;
 	}
+	let cloneObj = $('.uploadDiv').clone();
 	$('#uploadBtn').on('click',function(){
 		let formData = new FormData();
 		
@@ -49,10 +55,21 @@ $(function(){
 			data : formData,
 			type : 'post',
 			success : function(result){
-				alert("Uploaded")
+				alert("Uploaded");
+				$('.uploadDiv').html(cloneObj.html());
+				showUploadFile(result);
 			}
 		})
 	})
+	
+	let uploadResult = $('.uploadResult ul');
+	function showUploadFile(uploadResultArr){
+		let str = "";
+		$(uploadResultArr).each(function(i,obj){
+			str+="<li>"+obj.fileName+"</li>"
+		})
+		uploadResult.append(str);
+	}
 })
 </script>
 </html>
