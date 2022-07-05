@@ -17,6 +17,7 @@ import me.realtree.common.MemberInterceptor;
 @ComponentScan("me.realtree")
 public class ServletConfig implements WebMvcConfigurer{
 
+	//css java스크립트 불러들임 이거 없으면 안댐
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		

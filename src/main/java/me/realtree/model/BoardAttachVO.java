@@ -11,10 +11,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AttachFileDTO {
-	//attach 파일을 자바스크립트로 변환 시킴
-	private String fileName;
-	private String uploadPath;
+public class BoardAttachVO {
+
 	private String uuid;
-	private boolean image;
+	private String uploadPath;
+	private String fileName;
+	private boolean fileType;
+	private Long bno;
 }

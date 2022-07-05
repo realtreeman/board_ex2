@@ -3,6 +3,7 @@ package me.realtree.service;
 import java.util.List;
 
 import me.realtree.model.Board;
+import me.realtree.model.BoardAttachVO;
 import me.realtree.model.Criteria;
 
 public interface BoardService {
@@ -12,4 +13,5 @@ public interface BoardService {
 	void modify(Board board);
 	void remove(Long bno);
 	int totalCount(Criteria criteria);
+	List<BoardAttachVO> getAttachListVO(Long bno);
 }
