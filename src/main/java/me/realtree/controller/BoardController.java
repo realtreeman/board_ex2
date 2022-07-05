@@ -1,5 +1,9 @@
 package me.realtree.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +58,9 @@ public class BoardController {
 		return "redirect:list";
 	}
 	@PostMapping("/remove")
-	public String modify(Long bno, RedirectAttributes rttr) {
+	public String remove(Long bno, RedirectAttributes rttr) {
+		List<BoardAttachVO> attachList = service.getAttachListVO(bno);
+		deleteFiles(attachList);
 		service.remove(bno);
 		rttr.addFlashAttribute("message", bno);
 		return "redirect:list";
@@ -78,5 +84,27 @@ public class BoardController {
 	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
 		List<BoardAttachVO> attachList = service.getAttachListVO(bno);
 		return new ResponseEntity<>(attachList,HttpStatus.OK);
+	}
+	
+
+	private void deleteFiles(List<BoardAttachVO> attachList) {
+		if(attachList==null || attachList.size()==0) return;
+		
+		attachList.forEach(attach -> {
+			// uploadPath, uuid, fileName
+			Path file = Paths.get("C:/storage/"+attach.getUploadPath()+"/"+attach.getUuid()+"_"+attach.getFileName());
+			System.out.println(file);
+			try {
+				Files.deleteIfExists(file);
+				if(Files.probeContentType(file).startsWith("image")) {
+					Path thumNamil = Paths.get("C:/storage/"+attach.getUploadPath()+"/s_"+attach.getUuid()+"_"+attach.getFileName());
+					System.out.println(thumNamil);
+					Files.deleteIfExists(thumNamil);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		});
 	}
 }

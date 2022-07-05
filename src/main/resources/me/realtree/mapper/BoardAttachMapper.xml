@@ -16,4 +16,14 @@
 	<select id="findByBno" resultType="me.realtree.model.BoardAttachVO">
 		select * from attach_tbl where bno = #{bno}
 	</select>
+	
+	<delete id="deleteAll">
+		delete from attach_tbl where bno=#{bno}
+	</delete>
+	
+	<select id="getOldFiles" resultType="me.realtree.model.BoardAttachVO">
+		select * from attach_tbl
+		where uploadPath = date_format( date_add(now(),interval-0 day) ,'%Y\\%m\\%d');
+	</select>
+	
 </mapper>
